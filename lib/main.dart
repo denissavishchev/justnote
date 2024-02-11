@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:justnote/provider.dart';
 import 'package:justnote/screens/main_screen.dart';
@@ -25,7 +26,9 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider<NotesProvider>(create: (_) => NotesProvider()),
         ],
           builder: (_, child){
-            return const MainScreen();
+            return const ScreenUtilInit(
+                designSize: Size(360, 780),
+                child: MainScreen());
           },
         ),
     );

@@ -18,28 +18,28 @@ class ButtonWidget extends StatelessWidget {
         height: 50,
         decoration: BoxDecoration(
           borderRadius: const BorderRadius.all(Radius.circular(20)),
-          border: Border.all(width: 0.5, color: Colors.white),
+          border: Border.all(width: 1, color: Colors.white),
           boxShadow: [
             BoxShadow(
-                color: Colors.grey.withOpacity(0.3),
-                blurRadius: 4,
-                spreadRadius: 0.5,
-                offset: const Offset(2, 2)),
+                color: Colors.grey.withOpacity(0.8),
+                blurRadius: 6,
+                spreadRadius: 0.6,
+                offset: const Offset(1, 1)),
             BoxShadow(
                 color: Colors.white.withOpacity(0.8),
-                blurRadius: 6,
-                spreadRadius: 0.3,
-                offset: const Offset(-2, -2)),
+                blurRadius: 8,
+                spreadRadius: 0.4,
+                offset: const Offset(-1, -1)),
           ],
           gradient: LinearGradient(
             colors: [
-              kGrey.withOpacity(0.1),
+              kGrey.withOpacity(0.5),
               Colors.white,
 
             ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
-            stops: const [0, 1],
+            stops: const [0.1, 1],
           ),
         ),
         child: Icon(icon,

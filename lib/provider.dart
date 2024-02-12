@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:justnote/screens/main_screen.dart';
 import 'models/boxes.dart';
 import 'models/notes_model.dart';
 
@@ -7,7 +8,7 @@ class NotesProvider with ChangeNotifier {
   final TextEditingController titleController = TextEditingController();
   final TextEditingController bodyController = TextEditingController();
 
-  Future addNoteToBase() async {
+  Future addNoteToBase(context) async {
     final note = NotesModel()
       ..title = titleController.text
       ..body = bodyController.text
@@ -16,6 +17,11 @@ class NotesProvider with ChangeNotifier {
       ..dateTime = DateTime.now().toString();
     final box = Boxes.addNoteToBase();
     box.add(note);
+
+    Navigator.pushReplacement(context,
+        MaterialPageRoute(builder: (context) =>
+        const MainScreen()));
   }
+
 
 }

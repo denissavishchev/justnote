@@ -19,18 +19,17 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: MultiProvider(
-        providers: [
-          ChangeNotifierProvider<NotesProvider>(create: (_) => NotesProvider()),
-        ],
-          builder: (_, child){
-            return const ScreenUtilInit(
-                designSize: Size(360, 780),
-                child: MainScreen());
-          },
-        ),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<NotesProvider>(create: (_) => NotesProvider()),
+      ],
+      builder: (context, child){
+        return const ScreenUtilInit(
+            designSize: Size(360, 780),
+            child: MaterialApp(
+              debugShowCheckedModeBanner: false,
+                home: MainScreen()));
+      },
     );
   }
 }

@@ -52,8 +52,8 @@ class AddButtonWidget extends StatelessWidget {
                 BoxShadow(
                     color: Colors.grey.withOpacity(0.9),
                     blurRadius: 1,
-                    spreadRadius: 2,
-                    offset: const Offset(0.6, 0.6)),
+                    spreadRadius: 1,
+                    offset: const Offset(0.25, 0.3)),
 
                 BoxShadow(
                     color: Colors.white.withOpacity(0.1),

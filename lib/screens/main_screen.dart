@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:justnote/constants.dart';
 import 'package:justnote/models/boxes.dart';
 import 'package:justnote/provider.dart';
+import 'package:justnote/screens/add_note_screen.dart';
 import 'package:provider/provider.dart';
 import '../models/notes_model.dart';
 import '../widgets/add_button_widget.dart';
@@ -30,11 +31,6 @@ class MainScreen extends StatelessWidget {
                         color: Colors.white,
                         height: size.height * 0.08,
                       ),
-                      // TextField(controller: data.titleController,),
-                      // TextField(controller: data.bodyController,),
-                      // ElevatedButton(
-                      //     onPressed: () => data.addNoteToBase(),
-                      //     child: Text('Add')),
                       Expanded(
                         child: Stack(
                           children: [
@@ -75,7 +71,10 @@ class MainScreen extends StatelessWidget {
                             Positioned(
                               bottom: 20,
                               right: 0,
-                              child: AddButtonWidget(onTap: () => print('hell'),)
+                              child: AddButtonWidget(onTap: () =>
+                                  Navigator.pushReplacement(context,
+                                  MaterialPageRoute(builder: (context) =>
+                                  const AddNoteScreen())),)
                             )
                           ],
                         ),

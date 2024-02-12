@@ -17,7 +17,8 @@ class NotesProvider with ChangeNotifier {
       ..dateTime = DateTime.now().toString();
     final box = Boxes.addNoteToBase();
     box.add(note);
-
+    titleController.clear();
+    bodyController.clear();
     Navigator.pushReplacement(context,
         MaterialPageRoute(builder: (context) =>
         const MainScreen()));

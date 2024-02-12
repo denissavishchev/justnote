@@ -38,6 +38,7 @@ class MainScreen extends StatelessWidget {
                               width: size.width,
                               child: ListView.builder(
                                   itemCount: box.length,
+                                  padding: const EdgeInsets.only(bottom: 100),
                                   itemBuilder: (context, index) {
                                     return Container(
                                       height: 44,
@@ -47,7 +48,16 @@ class MainScreen extends StatelessWidget {
                                       child: Row(
                                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                         children: [
-                                          Text(notes[index].title, style: kBlackStyle,
+                                          Flexible(
+                                            child: SizedBox(
+                                              width: 250,
+                                              child: Text(notes[index].title,
+                                                maxLines: 1,
+                                                softWrap: false,
+                                                overflow: TextOverflow.fade,
+                                                style: kBlackStyle,
+                                              ),
+                                            ),
                                           ),
                                           Column(
                                             crossAxisAlignment: CrossAxisAlignment.end,

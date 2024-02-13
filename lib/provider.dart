@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:justnote/screens/main_screen.dart';
+import 'package:hive/hive.dart';
 import 'models/boxes.dart';
 import 'models/notes_model.dart';
 
@@ -7,6 +7,26 @@ class NotesProvider with ChangeNotifier {
 
   final TextEditingController titleController = TextEditingController();
   final TextEditingController bodyController = TextEditingController();
+
+  int editIndex = 0;
+  bool isEdit = true;
+
+  void editNote(int index, String title, String body){
+    titleController.text = title;
+    bodyController.text = body;
+    editIndex = index;
+    notifyListeners();
+  }
+
+  void editNoteToBase(int index, String title, String body, Box<NotesModel> box){
+    box.putAt(index, NotesModel()
+        ..title = title
+        ..body = body
+        ..photo = '0'
+        ..audio = '0'
+        ..dateTime = DateTime.now().toString()
+    );
+  }
 
   Future addNoteToBase(context) async {
     final note = NotesModel()
@@ -19,9 +39,10 @@ class NotesProvider with ChangeNotifier {
     box.add(note);
     titleController.clear();
     bodyController.clear();
-    Navigator.pushReplacement(context,
-        MaterialPageRoute(builder: (context) =>
-        const MainScreen()));
+  }
+
+  deleteNote(Box<NotesModel> box, int index){
+    box.deleteAt(index);
   }
 
 

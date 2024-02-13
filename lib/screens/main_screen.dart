@@ -4,7 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:justnote/constants.dart';
 import 'package:justnote/models/boxes.dart';
 import 'package:justnote/provider.dart';
-import 'package:justnote/screens/add_note_screen.dart';
+import 'package:justnote/screens/note_screen.dart';
 import 'package:provider/provider.dart';
 import '../models/notes_model.dart';
 import '../widgets/add_button_widget.dart';
@@ -40,40 +40,50 @@ class MainScreen extends StatelessWidget {
                                   itemCount: box.length,
                                   padding: const EdgeInsets.only(bottom: 100),
                                   itemBuilder: (context, index) {
-                                    return Container(
-                                      height: 44,
-                                      margin: const EdgeInsets.fromLTRB(12, 10, 12, 0),
-                                      padding: const EdgeInsets.symmetric(horizontal: 24),
-                                      decoration: insetDecoration,
-                                      child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Flexible(
-                                            child: SizedBox(
-                                              width: 250,
-                                              child: Text(notes[index].title,
-                                                maxLines: 1,
-                                                softWrap: false,
-                                                overflow: TextOverflow.fade,
-                                                style: kBlackStyle,
+                                    return GestureDetector(
+                                      onTap: () {
+                                        data.isEdit = true;
+                                        data.editNote(index, notes[index].title, notes[index].body);
+                                        Navigator.pushReplacement(context,
+                                            MaterialPageRoute(builder: (context) =>
+                                            const NoteScreen()));
+                                      },
+                                      onLongPress: () => data.deleteNote(box, index),
+                                      child: Container(
+                                        height: 44,
+                                        margin: const EdgeInsets.fromLTRB(12, 10, 12, 0),
+                                        padding: const EdgeInsets.symmetric(horizontal: 24),
+                                        decoration: insetDecoration,
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Flexible(
+                                              child: SizedBox(
+                                                width: 250,
+                                                child: Text(notes[index].title,
+                                                  maxLines: 1,
+                                                  softWrap: false,
+                                                  overflow: TextOverflow.fade,
+                                                  style: kBlackStyle,
+                                                ),
                                               ),
                                             ),
-                                          ),
-                                          Column(
-                                            crossAxisAlignment: CrossAxisAlignment.end,
-                                            children: [
-                                              const SizedBox(height: 3),
-                                              Text(
-                                                DateFormat('d MMM y').format(DateTime.parse(notes[index].dateTime)),
-                                                style: kBlackStyleSmall,
-                                              ),
-                                              Text(
-                                                DateFormat('Hm').format(DateTime.parse(notes[index].dateTime)),
-                                                style: kBlackStyleSmall,
-                                              ),
-                                            ],
-                                          ),
-                                        ],
+                                            Column(
+                                              crossAxisAlignment: CrossAxisAlignment.end,
+                                              children: [
+                                                const SizedBox(height: 3),
+                                                Text(
+                                                  DateFormat('d MMM y').format(DateTime.parse(notes[index].dateTime)),
+                                                  style: kBlackStyleSmall,
+                                                ),
+                                                Text(
+                                                  DateFormat('Hm').format(DateTime.parse(notes[index].dateTime)),
+                                                  style: kBlackStyleSmall,
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     );
                                   }),
@@ -81,10 +91,15 @@ class MainScreen extends StatelessWidget {
                             Positioned(
                               bottom: 20,
                               right: 0,
-                              child: AddButtonWidget(onTap: () =>
-                                  Navigator.pushReplacement(context,
-                                  MaterialPageRoute(builder: (context) =>
-                                  const AddNoteScreen())),)
+                              child: AddButtonWidget(onTap: () {
+                                data.isEdit = false;
+                                data.titleController.clear();
+                                data.bodyController.clear();
+                                Navigator.pushReplacement(context,
+                                    MaterialPageRoute(builder: (context) =>
+                                    const NoteScreen()));
+                                }
+                              )
                             )
                           ],
                         ),

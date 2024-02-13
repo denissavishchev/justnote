@@ -5,13 +5,13 @@ const kGrey = Color(0xffc5ced9);
 const kBlack = Color(0xff16354d);
 
 final kBlackStyle = TextStyle(
-    color: kBlack.withOpacity(0.8),
+    color: Colors.black.withOpacity(0.8),
     fontWeight: FontWeight.bold,
     fontSize: 18.sp,
     );
 
 final kBlackStyleSmall = TextStyle(
-    color: kBlack,
+    color: Colors.black,
     fontSize: 11.sp,
     );
 

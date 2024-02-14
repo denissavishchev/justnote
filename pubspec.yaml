@@ -16,10 +16,9 @@ dependencies:
   hive: ^2.2.3
   hive_flutter: ^1.0.0
   hive_generator: ^2.0.1
-  flutter_svg: ^2.0.9
-  flutter_screenutil: ^5.9.0
   intl: ^0.18.1
   permission_handler: ^11.1.0
+  awesome_notifications: ^0.8.2
 
 dev_dependencies:
   flutter_test:

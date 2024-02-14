@@ -1,5 +1,5 @@
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:justnote/provider.dart';
 import 'package:justnote/screens/main_screen.dart';
@@ -11,6 +11,24 @@ Future main() async{
   await Hive.initFlutter();
   Hive.registerAdapter(NotesModelAdapter());
   await Hive.openBox<NotesModel>('notes');
+  AwesomeNotifications().initialize(
+      null,
+      [
+        NotificationChannel(
+          channelKey: 'basic_channel',
+          channelGroupKey: 'basic_channel_group',
+          channelName: 'Scheduled Notifications',
+          importance: NotificationImportance.High,
+          channelShowBadge: true,
+          channelDescription: 'Notification channel for basic tests',)
+      ],
+      channelGroups: [
+        NotificationChannelGroup(
+            channelGroupKey: 'basic_channel_group',
+            channelGroupName: 'Basic group')
+      ],
+      debug: false
+  );
   runApp(const MyApp());
 }
 
@@ -24,11 +42,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider<NotesProvider>(create: (_) => NotesProvider()),
       ],
       builder: (context, child){
-        return const ScreenUtilInit(
-            designSize: Size(360, 780),
-            child: MaterialApp(
-              debugShowCheckedModeBanner: false,
-                home: MainScreen()));
+        return const MaterialApp(
+          debugShowCheckedModeBanner: false,
+            home: MainScreen());
       },
     );
   }

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:intl/intl.dart';
 import 'package:justnote/constants.dart';
 import 'package:justnote/provider.dart';
 import 'package:provider/provider.dart';
-
 import '../models/boxes.dart';
 import '../models/notes_model.dart';
 import '../widgets/button_widget.dart';
@@ -24,6 +24,11 @@ class NoteScreen extends StatelessWidget {
             final notes = box.values.toList().cast<NotesModel>();
             return Consumer<NotesProvider>(
               builder: (context, data, _){
+                // data.dateTime = data.editIndex != 0
+                //     ? !data.reminder
+                //     ? DateTime.parse(notes[data.editIndex].reminderTime)
+                //     : DateTime.now()
+                //     : data.dateTime;
                 return Column(
                   children: [
                     const SizedBox(height: 12,),
@@ -41,8 +46,12 @@ class NoteScreen extends StatelessWidget {
                             icon: Icons.arrow_back,
                           ),
                           const Spacer(),
+                          Visibility(
+                            visible: notes[data.editIndex].reminderTime != '',
+                              child: Text(DateFormat('H:m d MMM y').format(data.dateTime))),
+                          const Spacer(),
                           ButtonWidget(
-                            onTap: () => print('reminder'),
+                            onTap: () => data.setNotificationTime(context),
                             icon: Icons.alarm,
                           ),
                           const SizedBox(width: 30,),
@@ -54,6 +63,7 @@ class NoteScreen extends StatelessWidget {
                                   data.editIndex,
                                   data.titleController.text,
                                   data.bodyController.text,
+                                  notes[data.editIndex].reminderTime,
                                   box);
                               Navigator.pushReplacement(context,
                                   MaterialPageRoute(builder: (context) =>

@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 const kGrey = Color(0xffc5ced9);
 const kBlack = Color(0xff16354d);
+const kBlue = Color(0xff6B99C3);
 
 final kBlackStyle = TextStyle(
     color: Colors.black.withOpacity(0.8),
     fontWeight: FontWeight.bold,
-    fontSize: 18.sp,
+    fontSize: 18,
     );
 
-final kBlackStyleSmall = TextStyle(
+const kBlackStyleSmall = TextStyle(
     color: Colors.black,
-    fontSize: 11.sp,
+    fontSize: 11,
     );
 
 final insetDecoration = BoxDecoration(

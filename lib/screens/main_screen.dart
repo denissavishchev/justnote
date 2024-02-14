@@ -43,6 +43,7 @@ class MainScreen extends StatelessWidget {
                                     return GestureDetector(
                                       onTap: () {
                                         data.isEdit = true;
+                                        data.dateTime = DateTime.now();
                                         data.editNote(index, notes[index].title, notes[index].body);
                                         Navigator.pushReplacement(context,
                                             MaterialPageRoute(builder: (context) =>
@@ -68,19 +69,22 @@ class MainScreen extends StatelessWidget {
                                                 ),
                                               ),
                                             ),
-                                            Column(
-                                              crossAxisAlignment: CrossAxisAlignment.end,
-                                              children: [
-                                                const SizedBox(height: 3),
-                                                Text(
-                                                  DateFormat('d MMM y').format(DateTime.parse(notes[index].dateTime)),
-                                                  style: kBlackStyleSmall,
-                                                ),
-                                                Text(
-                                                  DateFormat('Hm').format(DateTime.parse(notes[index].dateTime)),
-                                                  style: kBlackStyleSmall,
-                                                ),
-                                              ],
+                                            Visibility(
+                                              visible: notes[index].reminderTime != '',
+                                              child: Column(
+                                                crossAxisAlignment: CrossAxisAlignment.end,
+                                                children: [
+                                                  const SizedBox(height: 3),
+                                                  Text(
+                                                    DateFormat('d MMM y').format(DateTime.parse(notes[index].reminderTime)),
+                                                    style: kBlackStyleSmall,
+                                                  ),
+                                                  Text(
+                                                    DateFormat('Hm').format(DateTime.parse(notes[index].reminderTime)),
+                                                    style: kBlackStyleSmall,
+                                                  ),
+                                                ],
+                                              ),
                                             ),
                                           ],
                                         ),

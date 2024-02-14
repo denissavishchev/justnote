@@ -1,7 +1,7 @@
 import 'package:hive/hive.dart';
 part 'notes_model.g.dart';
 
-@HiveType(typeId: 23)
+@HiveType(typeId: 3)
 class NotesModel extends HiveObject{
   @HiveField(0)
   late String title;
@@ -12,5 +12,9 @@ class NotesModel extends HiveObject{
   @HiveField(3)
   late String audio;
   @HiveField(4)
-  late String dateTime;
+  late String createTime;
+  @HiveField(5)
+  late String editTime;
+  @HiveField(6)
+  late String reminderTime;
 }

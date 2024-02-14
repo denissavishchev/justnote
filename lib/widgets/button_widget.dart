@@ -4,10 +4,13 @@ import '../constants.dart';
 class ButtonWidget extends StatelessWidget {
   const ButtonWidget({Key? key,
     required this.onTap,
-    required this.icon}) : super(key: key);
+    required this.icon,
+    this.color = Colors.white
+  }) : super(key: key);
 
   final VoidCallback onTap;
   final IconData icon;
+  final Color color;
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +58,7 @@ class ButtonWidget extends StatelessWidget {
                   spreadRadius: -12,
                   offset: const Offset(-0.8, -0.8)),
             ],
-            size: 34, color: Colors.white),
+            size: 34, color: color),
       ),
     );
   }

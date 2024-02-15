@@ -17,4 +17,6 @@ class NotesModel extends HiveObject{
   late String editTime;
   @HiveField(6)
   late String reminderTime;
+  @HiveField(7)
+  late int notificationId;
 }

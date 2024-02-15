@@ -23,13 +23,14 @@ class NotesModelAdapter extends TypeAdapter<NotesModel> {
       ..audio = fields[3] as String
       ..createTime = fields[4] as String
       ..editTime = fields[5] as String
-      ..reminderTime = fields[6] as String;
+      ..reminderTime = fields[6] as String
+      ..notificationId = fields[7] as int;
   }
 
   @override
   void write(BinaryWriter writer, NotesModel obj) {
     writer
-      ..writeByte(7)
+      ..writeByte(8)
       ..writeByte(0)
       ..write(obj.title)
       ..writeByte(1)
@@ -43,7 +44,9 @@ class NotesModelAdapter extends TypeAdapter<NotesModel> {
       ..writeByte(5)
       ..write(obj.editTime)
       ..writeByte(6)
-      ..write(obj.reminderTime);
+      ..write(obj.reminderTime)
+      ..writeByte(7)
+      ..write(obj.notificationId);
   }
 
   @override

@@ -43,8 +43,13 @@ class MainScreen extends StatelessWidget {
                                     return GestureDetector(
                                       onTap: () {
                                         data.isEdit = true;
-                                        data.dateTime = DateTime.now();
-                                        data.editNote(index, notes[index].title, notes[index].body);
+                                        notes[index].reminderTime == ''
+                                            ? data.reminder = false : data.reminder = true;
+                                        data.editNote(index, notes[index].title,
+                                            notes[index].body,
+                                            notes[index].reminderTime == ''
+                                        ? 'x' : notes[index].reminderTime,
+                                        notes[index].notificationId);
                                         Navigator.pushReplacement(context,
                                             MaterialPageRoute(builder: (context) =>
                                             const NoteScreen()));
@@ -69,22 +74,23 @@ class MainScreen extends StatelessWidget {
                                                 ),
                                               ),
                                             ),
-                                            Visibility(
-                                              visible: notes[index].reminderTime != '',
-                                              child: Column(
-                                                crossAxisAlignment: CrossAxisAlignment.end,
-                                                children: [
-                                                  const SizedBox(height: 3),
-                                                  Text(
-                                                    DateFormat('d MMM y').format(DateTime.parse(notes[index].reminderTime)),
-                                                    style: kBlackStyleSmall,
-                                                  ),
-                                                  Text(
-                                                    DateFormat('Hm').format(DateTime.parse(notes[index].reminderTime)),
-                                                    style: kBlackStyleSmall,
-                                                  ),
-                                                ],
-                                              ),
+                                            Text(
+                                              notes[index].reminderTime == '' ? 'X' : DateFormat('Hm').format(DateTime.parse(notes[index].reminderTime)),
+                                              style: kBlackStyleSmall,
+                                            ),
+                                            Column(
+                                              crossAxisAlignment: CrossAxisAlignment.end,
+                                              children: [
+                                                const SizedBox(height: 3),
+                                                Text(
+                                                  DateFormat('d MMM y').format(DateTime.parse(notes[index].editTime)),
+                                                  style: kBlackStyleSmall,
+                                                ),
+                                                Text(
+                                                  DateFormat('Hm').format(DateTime.parse(notes[index].editTime)),
+                                                  style: kBlackStyleSmall,
+                                                ),
+                                              ],
                                             ),
                                           ],
                                         ),
@@ -97,6 +103,7 @@ class MainScreen extends StatelessWidget {
                               right: 0,
                               child: AddButtonWidget(onTap: () {
                                 data.isEdit = false;
+                                data.reminder = false;
                                 data.titleController.clear();
                                 data.bodyController.clear();
                                 Navigator.pushReplacement(context,

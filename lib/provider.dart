@@ -115,6 +115,7 @@ class NotesProvider with ChangeNotifier {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       ElevatedButton(onPressed: (){
+                        AwesomeNotifications().cancel(notificationId);
                         reminder = true;
                         notifyListeners();
                         Navigator.of(context).pop();

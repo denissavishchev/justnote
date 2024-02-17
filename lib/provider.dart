@@ -75,13 +75,13 @@ class NotesProvider with ChangeNotifier {
 
   Future<void> addNotificationData() async {
     AwesomeNotifications().setChannel(NotificationChannel(
-        channelKey: 'basic_channel',
+        channelKey: 'scheduled',
         channelName: 'Scheduled Notifications',
         channelDescription: 'Notification channel for basic tests'));
     await AwesomeNotifications().createNotification(
       content: NotificationContent(
         id: notificationId,
-        channelKey: 'basic_channel',
+        channelKey: 'scheduled',
         title: '${Emojis.time_alarm_clock} ${titleController.text}',
       ),
       schedule: NotificationCalendar(

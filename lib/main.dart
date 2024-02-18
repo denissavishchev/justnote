@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:justnote/provider.dart';
 import 'package:justnote/screens/main_screen.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 import 'models/notes_model.dart';
 
@@ -12,11 +11,6 @@ Future main() async{
   await Hive.initFlutter();
   Hive.registerAdapter(NotesModelAdapter());
   await Hive.openBox<NotesModel>('notes');
-  await Permission.notification.isDenied.then((value) {
-    if (value) {
-      Permission.notification.request();
-    }
-  });
   AwesomeNotifications().initialize(
       null,
       [

@@ -75,7 +75,9 @@ class MainScreen extends StatelessWidget {
                                               ),
                                             ),
                                             Text(
-                                              notes[index].reminderTime == '' ? 'X' : DateFormat('Hm').format(DateTime.parse(notes[index].reminderTime)),
+                                              notes[index].reminderTime == ''
+                                                  ? 'X'
+                                                  : DateFormat('d MMM Hm').format(DateTime.parse(notes[index].reminderTime)),
                                               style: kBlackStyleSmall,
                                             ),
                                             Column(

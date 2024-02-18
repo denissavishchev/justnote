@@ -41,7 +41,9 @@ class NoteScreen extends StatelessWidget {
                             icon: Icons.arrow_back,
                           ),
                           const Spacer(),
-                          Text(data.reminder == false ? '' : DateFormat('HH:mm d MMM y').format(data.dateTime)),
+                          Text(data.reminder == false
+                              ? ''
+                              : DateFormat('HH:mm d MMM y').format(data.dateTime)),
                           const Spacer(),
                           ButtonWidget(
                             onTap: () => data.setNotificationTime(context),

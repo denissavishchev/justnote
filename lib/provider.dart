@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:justnote/constants.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'models/boxes.dart';
 import 'models/notes_model.dart';
 import 'package:awesome_notifications/awesome_notifications.dart';
@@ -96,7 +97,11 @@ class NotesProvider with ChangeNotifier {
     );
   }
   
-  void setNotificationTime(context){
+  void setNotificationTime(context) async{
+    PermissionStatus status = await Permission.notification.status;
+    if (!status.isGranted) {
+      status = await Permission.notification.request();
+    }
       showCupertinoModalPopup(
           context: context,
           builder: (context){
@@ -120,7 +125,7 @@ class NotesProvider with ChangeNotifier {
                         notifyListeners();
                         Navigator.of(context).pop();
                       },
-                          child: Text('Add')),
+                          child: Text('$status')),
                       ElevatedButton(onPressed: () {
                         AwesomeNotifications().cancel(notificationId);
                         reminder = false;

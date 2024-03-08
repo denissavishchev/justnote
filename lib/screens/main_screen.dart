@@ -5,9 +5,11 @@ import 'package:justnote/constants.dart';
 import 'package:justnote/models/boxes.dart';
 import 'package:justnote/provider.dart';
 import 'package:justnote/screens/note_screen.dart';
+import 'package:justnote/widgets/button_widget.dart';
 import 'package:provider/provider.dart';
 import '../models/notes_model.dart';
 import '../widgets/add_button_widget.dart';
+import 'ai_screen.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -30,6 +32,17 @@ class MainScreen extends StatelessWidget {
                       Container(
                         color: Colors.white,
                         height: size.height * 0.08,
+                        padding: const EdgeInsets.symmetric(horizontal: 18),
+                        child: Row(
+                          children: [
+                            const Spacer(),
+                            ButtonWidget(
+                                onTap: () => Navigator.pushReplacement(context,
+                                    MaterialPageRoute(builder: (context) =>
+                                    const AIScreen())),
+                                icon: Icons.lightbulb)
+                          ],
+                        ),
                       ),
                       Expanded(
                         child: Stack(

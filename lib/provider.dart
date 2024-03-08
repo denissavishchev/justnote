@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:hive/hive.dart';
 import 'package:justnote/constants.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -7,10 +8,27 @@ import 'models/boxes.dart';
 import 'models/notes_model.dart';
 import 'package:awesome_notifications/awesome_notifications.dart';
 
+class Message {
+  final bool isUser;
+  final String message;
+  final String date;
+
+  Message({
+    required this.isUser,
+    required this.message,
+    required this.date,
+  });
+}
+
 class NotesProvider with ChangeNotifier {
 
   final TextEditingController titleController = TextEditingController();
   final TextEditingController bodyController = TextEditingController();
+  final TextEditingController messageController = TextEditingController();
+  static const apiKey = '';
+  final model = GenerativeModel(model: 'gemini-pro', apiKey: apiKey);
+
+  final List<Message> messages = [];
 
   int editIndex = 0;
   bool isEdit = true;
@@ -26,6 +44,18 @@ class NotesProvider with ChangeNotifier {
     dateTime = reminderTime == 'x' ? DateTime.now() : DateTime.parse(reminderTime);
     notificationId = id;
     editIndex = index;
+    notifyListeners();
+  }
+
+
+
+  Future<void> sendMessage() async{
+    final message = messageController.text;
+    messageController.clear();
+
+    final content = [Content.text(message)];
+    final response = await model.generateContent(content);
+    messages.add(Message(isUser: false, message: response.text ?? '', date: DateTime.now().toString()));
     notifyListeners();
   }
 
